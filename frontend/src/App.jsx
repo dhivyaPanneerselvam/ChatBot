@@ -19,7 +19,13 @@ import {
   Moon
 } from "lucide-react";
 
-const rawApiBase = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+let rawApiBase = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
+// Auto-append .onrender.com if Render injected service name without TLD
+if (rawApiBase && !rawApiBase.includes(".") && !rawApiBase.includes("localhost") && !rawApiBase.includes("127.0.0.1")) {
+  rawApiBase = `${rawApiBase}.onrender.com`;
+}
+
 const formattedBase = rawApiBase.startsWith("http://") || rawApiBase.startsWith("https://")
   ? rawApiBase
   : `https://${rawApiBase}`;
