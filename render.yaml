@@ -1,0 +1,32 @@
+services:
+  # --------------------------------------------------------
+  # Backend Web Service (FastAPI + Playwright RAG Engine)
+  # --------------------------------------------------------
+  - type: web
+    name: website-chatbot-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    region: oregon
+    plan: free
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+
+  # --------------------------------------------------------
+  # Frontend Static Site (Vite React UI)
+  # --------------------------------------------------------
+  - type: static
+    name: website-chatbot-frontend
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: website-chatbot-backend
+          property: url
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

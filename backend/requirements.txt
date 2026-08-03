@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+gunicorn
+playwright
+beautifulsoup4
+sentence-transformers
+chromadb
+rank-bm25
+groq
+python-dotenv
