@@ -20,7 +20,10 @@ import {
 } from "lucide-react";
 
 const rawApiBase = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
-const API_BASE = rawApiBase.replace(/\/+$/, "");
+const formattedBase = rawApiBase.startsWith("http://") || rawApiBase.startsWith("https://")
+  ? rawApiBase
+  : `https://${rawApiBase}`;
+const API_BASE = formattedBase.replace(/\/+$/, "");
 
 export default function App() {
   // Theme State (Dark: Black/Red, Light: White/Yellow)
