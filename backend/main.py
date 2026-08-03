@@ -23,7 +23,7 @@ app.include_router(chat_router)
 app.include_router(index_router)
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def home():
     return {
         "message": "Website Chatbot Backend is Running..."
