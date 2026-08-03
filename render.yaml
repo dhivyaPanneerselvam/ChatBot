@@ -16,8 +16,9 @@ services:
   # --------------------------------------------------------
   # Frontend Static Site (Vite React UI)
   # --------------------------------------------------------
-  - type: static
+  - type: web
     name: website-chatbot-frontend
+    env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
